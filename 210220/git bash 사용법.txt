@@ -1,0 +1,83 @@
+D:\주말반_김혜련\github\vue
+
+cd 경로 변경
+D:/주말반_김혜련/github/vue
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+깃설정 [환경설정]
+/////////////////////////////////////////////////////////////////////////////
+
+TJ@1304-08 MINGW64 ~
+$ pwd
+/c/Users/TJ
+
+TJ@1304-08 MINGW64 ~
+$ cd D:/주말반_김혜련/github/vue
+
+TJ@1304-08 MINGW64 /d/주말반_김혜련/github/vue
+$ git init
+Initialized empty Git repository in D:/주말반_김혜련/github/vue/.git/
+
+TJ@1304-08 MINGW64 /d/주말반_김혜련/github/vue (master)
+$ ls
+210220/  210220.html
+
+TJ@1304-08 MINGW64 /d/주말반_김혜련/github/vue (master)
+$ ls -la
+total 8
+drwxr-xr-x 1 TJ 197121    0 Feb 20 12:32 ./
+drwxr-xr-x 1 TJ 197121    0 Feb 20 12:10 ../
+drwxr-xr-x 1 TJ 197121    0 Feb 20 12:31 .git/
+drwxr-xr-x 1 TJ 197121    0 Feb 20 12:32 210220/
+-rw-r--r-- 1 TJ 197121 2820 Feb 20 12:00 210220.html
+
+/////////////////////////////////////////////////////////////////////////////
+원격접속(리모트 remote) 필요 :  사용자 이메일, 사용자 이름
+/////////////////////////////////////////////////////////////////////////////
+사용자(user) 이메일(email)
+$ git config user.email 'kssd89@naver.com'
+
+사용자(user) 이름(name)
+$ git config user.name 'hyeryunkim4'
+
+//깃허브 리포지토리(저장소) 원격 추가(add) 접속
+$ git remote add origin https://github.com/hyeryunkim4/vue.git
+
+//확인
+$ git remote -v
+origin  https://github.com/hyeryunkim4/vue.git (fetch)
+origin  https://github.com/hyeryunkim4/vue.git (push)
+
+//파일 올리기 업로드(Upload) (Push)
+3-1 add
+//////////////
+업로드할 파일 선택한다.
+스테이징(올릴 파일을 스테이징에 올린다.)
+git add .
+
+
+3-2 commit
+//////////////
+커밋한다(commit)
+검증 : 수정, 삭제, 추가되는 것들을 검증(검사)
+git commit  -m '2021-02-20 VS CODE 젠코딩 공부내역'
+
+On branch master
+nothing to commit, working tree clean
+
+
+3-3 push
+///////////////
+최종 업로드 Push하기
+git push origin master
+
+Enumerating objects: 8, done.
+Counting objects: 100% (8/8), done.
+Delta compression using up to 4 threads
+Compressing objects: 100% (4/4), done.
+Writing objects: 100% (8/8), 89.03 KiB | 5.56 MiB/s, done.
+Total 8 (delta 0), reused 0 (delta 0), pack-reused 0
+To https://github.com/hyeryunkim4/vue.git
+ * [new branch]      master -> master
