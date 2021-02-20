@@ -12,8 +12,14 @@
         <!-- 마크업 - DOM View -->
         <div id="app">
             <h1>자바스크립트 프레임워크 Vue.js 공부하기</h1>
-            <!-- 뷰 테이터 속성 바인딩 하기, 머스테시 안에 바인딩 속성 넣기 -->
-            <h2>{{ msg }}</h2>
+            <!-- 뷰 데이터 속성 바인딩 하기, 머스테시 안에 바인딩 속성 넣기 -->
+            <!-- h2를 클릭하여 msg 데이터 속성을 변경하는 이벤트 실행 
+                 v-on:click = '(메서드)함수 호출 ggoggo' 메서드(methods) 호출하여 msg 속성값을 'VUE.JS'로 변경 바인딩한다.
+
+                 v-on: 디렉티브는 @로 사용가능
+                 v-bind: 디렉티브는 :로 사용가능 -->
+            <!-- <h2 v-on:click = 'ggoggo'>{{ msg }}</h2> -->
+            <h2 @click = 'ggoggo'>{{ msg }}</h2>
             <p>{{ txt }}</p>
             <hr>
         </div>
@@ -26,17 +32,19 @@
                 data: { //속성 방식
                     msg: '자바스크립트 data',
                     txt: 'JAVASCRIPT VUE.JS'
+                },
+                methods: {
+                    ggoggo: function(){ //메서드(리터럴) 함수
+                        var that = this;
+
+                        alert('메서드 호출 실행');
+                        that.msg = 'VUE.JS'; //msg 속성 변경
+                        //메서드 함수 내에서는 속성값 대입 연산자 = 사용
+                        that.txt = '김혜련';
+                    }
                 }
             });
         </script>
-
-        <!-- 스타일 -->
-        <style>
-            #wrap {width: 1000px; margin: 0 auto; background: #f0f0f0; padding: 100px 0;}
-            #app {text-align: center;}
-            #header {text-align: center;}
-            h2, p {color: #39b; background: #ddd; display: inline-flex; padding: 10px 20px; font-size: 30px; font-weight: normal;}
-        </style>
 
 
         <!--  -->
@@ -44,7 +52,7 @@
 
         <div id="header">
             <h1>MVVM 모델링</h1>
-            <h2>{{ msg }}</h2>
+            <h2 @click = 'ggagga'>{{ msg }}</h2>
             <p>{{babo}}</p>
             <hr>
         </div>
@@ -52,14 +60,69 @@
         <script>
             var headerObj = new Vue({
                 el: '#header',
-                data(){ //메서드 방식 - 메서드 방식은 반드시 return{ 속성(property):속성값(value)}
+                // data: function(){ //아래처럼 변경 가능함
+                data(){ //메서드 방식 - 메서드 방식은 반드시 return{ 속성(property): 속성값(value)}
                     return {
                         msg: 'MVVM 패턴',
                         babo: 500000
                     }
+                },
+                methods: {
+                    ggagga: function(){
+                        this.msg = '대한민국 만세!!!';
+                        this.babo = 1000000;
+                    }
                 }
             });
         </script>
+
+
+        <!--  -->
+
+
+        <div id="main">
+            <h1>테스트</h1>
+            <h2 v-on:click = 'mFn'>{{ msg }}</h2>
+            <p>{{ txt }}</p>
+            <hr>
+        </div>
+
+        <script>
+            var mainObj = new Vue({
+                el: '#main',
+                // data: {
+                //     msg: 'h2 테스트',
+                //     txt: 'p 테스트'
+                // }
+                data(){
+                    return {
+                        msg: 'h2 테스트',
+                        txt: 'p 테스트'
+                    }
+                },
+                methods: {
+                    mFn: function(){
+                        this.msg = '에이치투 변경됨!';
+                        this.txt = '피 변경됨!';
+                    }
+                }
+            });
+        </script>
+
+
+        <!--  -->
+
+        
+        <!-- 스타일 -->
+        <style>
+            #wrap {width: 1000px; margin: 0 auto; background: #f0f0f0; padding: 100px 0;}
+            #app {text-align: center;}
+            #header {text-align: center;}
+            h2, p {color: #39b; background: #ddd; display: inline-flex; padding: 10px 20px; font-size: 30px; font-weight: normal;}
+
+            #main {text-align: center;}
+            h2 {cursor: pointer;}
+        </style>
     </div>
 </body>
 </html>
