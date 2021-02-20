@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>과제</title>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <!-- <script src="./vue/lib/vue.js"></script> -->
+</head>
+<body>
+  <div id="wrap">
+    <!--  -->
+    <div id="main">
+      <h1>과제</h1>
+      <h2 v-on:click='hClick'>{{ hTxt }}</h2>
+      <p>{{ pTxt }}</p>
+    </div>
+
+    <!--  -->
+    <script>
+      var mainVue = new Vue({
+        el: '#main',
+        data(){
+          return {
+            hTxt: '클릭하세요!',
+            pTxt: '글자가 바뀝니다!'
+          }
+        },
+        methods: {
+          hClick: function(){
+            this.hTxt = '클릭됨';
+            this.pTxt = '변경 완료!';
+          }
+        }
+      })
+    </script>
+
+    <!--  -->
+    <style>
+      #wrap {width: 1440px; margin: auto; background: #dcdcdc;}
+      #main {text-align: center; padding: 20px;}
+      h2, p {display: inline-flex; background: #fff; font-size: 20px; font-weight: normal; padding: 10px;}
+      h2 {cursor: pointer;}
+    </style>
+  </div>
+</body>
+</html>
