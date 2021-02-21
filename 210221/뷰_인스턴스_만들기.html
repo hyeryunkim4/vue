@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 인스턴스 만들기 & 자바스크립트 클래스(객체와 함수)</title>
+    <!-- <script src="./vue/lib/vue.js"></script> -->
+    <style>
+        table {width: 600px; margin: 0 auto;}
+        table th, 
+        table td {border: 1px solid #ccc; height: 45px; text-align: center;}
+        table#table td:nth-child(2) {text-align: left;}
+    </style>
+</head>
+<body>
+    <h1>리터럴 방식 클래스 인스턴스 만들기</h1>
+    <h2>주소부</h2>
+    <table id="table">
+        
+    </table>
+    <table id="sungjuk">
+        
+    </table>
+
+    <script>
+        /*
+        var app = {};           // 리터럴 방식 - 객체
+        var app = new Object(); // 생성자 방식 - 객체
+
+        var app = [];          // 리터럴 방식 - 배열 객체
+        var app = new Array(); // 생성자 방식 - 배열 객체
+        */
+
+        // 인스턴스(객체) 생성
+        var vue = {
+            cnt: 0, // 프로퍼티(멤버변수)
+            el: '<h1>프로퍼티(멤버변수) 템플릿</h1>',
+            method: ['피자', '닭칼국수', '김밥', '라면', '토마토 스파게티'],
+            main: {
+                student: [
+                    {번호: 1, 이름: '이순신', kor: 100, eng: 090, mat: 085}, // 인덱스 [0] / 1행
+                    {번호: 2, 이름: '박순실', kor: 098, eng: 055, mat: 099}, // 인덱스 [1] / 2행
+                    {번호: 3, 이름: '이혁재', kor: 099, eng: 096, mat: 098}, // 인덱스 [2] / 3행
+                    {번호: 4, 이름: '조지현', kor: 080, eng: 099, mat: 066}, // 인덱스 [3] / 4행
+                    {번호: 5, 이름: '홍우현', kor: 071, eng: 089, mat: 095}  // 인덱스 [4] / 5행
+                ],
+                address: [
+                    {이름: '이순신', 주소: '서울시 서초구 서초동 1'},
+                    {이름: '박순실', 주소: '서울시 서초구 서초동 2'},
+                    {이름: '이혁재', 주소: '서울시 서초구 서초동 3'},
+                    {이름: '조지현', 주소: '서울시 서초구 서초동 4'},
+                    {이름: '홍우현', 주소: '서울시 서초구 서초동 5'}
+                ]
+            },
+            init: function(){ // 메서드(멤버함수)
+                this.cnt = 500; //this는 인스턴스(객체)
+                this.el += '<h2>프로퍼티(멤버변수)에 템플릿 내용 추가</h2>'
+                console.log(this.cnt);
+                console.log(this.el);
+            },
+            compute: function(){
+                /*
+                주소부 탬플릿에 출력
+                반복문 이용
+                */
+                var txt = ''; // 출력 내용 보관하는 변수
+                var $table = document.querySelector('#table'); // 선택자
+
+                txt = '<tr><th>이름</th><th>주소</th></tr>'; // 제목 - 1회 출력
+                // 반복처리
+                // 자바스크립트 객체 배열처리
+                // this.main.address.forEach(function(엘리먼트 태그, 인덱스, 배열){
+                this.main.address.forEach(function(el, index, arr){
+                    console.log('배열 처리',el,index,arr);
+                    txt += '<tr><td>' + el.이름 + '</td><td>' + el.주소 + '</td></tr>';
+                });
+
+                $table.innerHTML = txt; // 테이블에 데이터 출력
+
+                /* */ 
+
+                var txt2 = '';
+                var $sungjuk = document.querySelector('#sungjuk');
+
+                txt2 = '<tr><th>번호</th><th>이름</th><th>국어</th><th>영어</th><th>수학</th></tr>';
+                
+                this.main.student.forEach(function(el, idx, arr){
+                    txt2 += '<tr><td>' + el.번호 + '</td><td>' + el.이름 + '</td><td>' + el.kor + '</td><td>' + el.eng + '</td><td>' + el.mat + '</td></tr>'
+                });
+
+                $sungjuk.innerHTML = txt2;
+
+
+
+
+                console.log(this.method);
+                console.log(this.method[0]);
+                console.log(this.method[1]);
+                console.log(this.method[2]);
+                console.log(this.method[3]);
+                console.log(this.method[4]);
+
+                // 성적
+                console.log(this.main); // main 프로퍼티(멤버변수)
+                console.log(this.main.student); // 인스턴스.프로퍼티
+                console.log(this.main.student[3]); // 인스턴스.프로퍼티.프로퍼티[3]
+                console.log(this.main.student[3].이름); // 인스턴스.프로퍼티.프로퍼티[3].프로퍼티
+                console.log(this.main.student[3].eng); // 인스턴스.프로퍼티.프로퍼티[3].프로퍼티 최종 프로퍼티 값(value)
+
+                // 주소
+                console.log(this.main.address[0].이름);
+                console.log(this.main.address[0].주소);
+
+                var tot = this.main.student[3].kor + this.main.student[3].eng + this.main.student[3].mat;
+                // console.log('총점 : ' + tot); // ECMA Script5 [ES5]
+                console.log(`총점 : ${tot}`); // ECMA Script6 [ES6]
+            },
+            run: function(){ // 인스턴스 전체 실행 메서드
+                this.init();
+                this.compute();
+            }
+        } // 인스턴스(객체) 끝
+
+        vue.run(); // vue 인스턴스(객체) 안에 run 이라는 메서드(멤버 함수) 실행
+        console.log('///////////////////////////////////')
+    </script>
+
+
+
+    <!--  -->
+
+
+
+    <script>
+        var objProject = {
+            a: 100,
+            el: 'Vue 프레임워크',
+            data: {
+                arr: [
+                    {이름: '김혜련', kor: 95, eng: 70, mat: 77},
+                    {이름: '김혜련', kor: 98, eng: 70, mat: 47},
+                    {이름: '김혜련', kor: 98, eng: 74, mat: 47},
+                    {이름: '김혜련', kor: 78, eng: 54, mat: 42},
+                    {이름: '김혜련', kor: 72, eng: 54, mat: 62},
+                    {이름: '김혜련', kor: 72, eng: 57, mat: 92}
+                ]
+            },
+            method1: function(){
+                this.a = 500;
+                console.log(this.a);
+            },
+            method2: function(){
+                this.el += ' 자바스크립트 라이브러리';
+                console.log(this.el);
+            },
+            method3: function(){
+                console.log(this.data.arr);
+            },
+            init: function(){
+                this.method1();
+                this.method2();
+                this.method3();
+            }
+        };
+
+        objProject.init();
+        console.log('///////////////////////////////////')
+    </script>
+
+
+
+    <!--  -->
+
+
+    <table id = "#introduce">
+        
+        
+    </table>
+    <!--     
+    인스턴스 생성
+    프로퍼티 : 값
+    프로퍼티 : 배열
+    메서드 만들어서 프로퍼티 값 변환 또는 출력
+    인스턴스 전체 실행 메서드 init
+    -->
+    <script>
+        var obj = {
+            a: '안녕',
+            b: {
+                bArr: [
+                    {이름: '홍길동', 나이: 20, 주소: '서울 강남구'},
+                    {이름: '아무개', 나이: 30, 주소: '서울 서초구'}
+                ]
+            },
+            methodA: function(){
+                this.a += '하세요';
+                console.log(this.a);
+            },
+            methodB: function(){
+                console.log(`저는 ${this.b.bArr[0].이름}이고, 나이는 ${this.b.bArr[0].나이}살, 사는 곳은 ${this.b.bArr[0].주소}입니다!`);
+                console.log(this.b.bArr[1]);
+            },
+            init: function(){
+                this.methodA();
+                this.methodB();
+            }
+        };
+
+        obj.init();
+    </script>
+</body>
+</html>
