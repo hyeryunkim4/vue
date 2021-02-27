@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>뷰 라이프 사이클 & 제이쿼리 사용</title>
+    <!-- 오픈소스 -->
+    <script src="./js/lib/jquery.min.js"></script>
+    <script src="./vue/lib/vue.js"></script>
+    <style>
+        #header {text-align: center;}
+    </style>
+</head>
+<body>
+    <!-- html 요소 영역 -->
+    <div id="header">
+        <h1 class="h1-btn">헤더 영역의 뷰 라이프 사이클</h1>
+        <h2>머스테시 표시 안에 데이터 속성(멤버변수)에 출력 / {{msg}}</h2>
+        <p>제품 가격은 {{num}}입니다.</p>
+        <button type="button" v-on:click='price'>클릭price</button>
+        <button type="button" v-on:mouseenter='product'>마우스 오버</button>
+        <button type="button" @click='product'>'v-on:' 디렉티브를 '@'로 대체 사용product</button>
+    </div>
+
+    <!-- 스크립트 영역 -->
+    <script>
+        const header = new Vue({ // 뷰의 인스턴스 생성
+            el: '#header',
+            data: {
+                msg: '뷰 인스턴스 데이터 메세지',
+                num: 590
+            },
+            methods: { //메서드 관리해주는 속성
+                // 메서드 === 리터럴 함수 === 익명함수
+                product: function(){
+                    let that = this;
+
+                    that.num += 100; // that.num === this.num === header.num
+                    that.msg = '데이터 메세지 수정';
+                },
+                price: function(){
+                    this.num = 100000;
+                }
+            },
+            beforeCreate: function(){
+                console.log('뷰 생명주기 beforeCreate');
+            },
+            created: function(){
+                console.log('뷰 생명주기 created');
+            },
+            beforeMounte: function(){
+                console.log('뷰 생명주기 beforeMounte');
+            },
+            mounted: function(){
+                console.log('뷰 생명주기 mounted / 제이쿼리와 라이브러리 등 사용 가능');
+                
+                let that = this; // 인스턴스 객체이름
+                // 마운트 단계 이후부터 사용 가능
+                $('.h1-btn').on({
+                    click: function(){
+                        that.num += 100000;
+                        console.log('mounted 제이쿼리 버튼 클릭 이벤트', that.num);
+                    },
+                    focusin: function(){
+                        alert('제이쿼리 포커스 이벤트');
+                    }
+                })
+            },
+            beforeUpdate: function(){
+                console.log('뷰 생명주기 beforeUpdate / 실제 업데이트 / 수정은 여기서');
+            },
+            updated: function(){
+                console.log('뷰 생명주기 updated / 여기는 수정된 결과만');
+            },
+            beforeDestory: function(){
+                console.log('뷰 생명주기 beforeDestory');
+            },
+            destoryed: function(){
+                console.log('뷰 생명주기 destoryed');
+            }
+        })
+    </script>
+</body>
+</html>

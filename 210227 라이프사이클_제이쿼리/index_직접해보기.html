@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>210227</title>
+    <!-- 오픈소스 -->
+    <script src="./vue/lib/vue.js"></script>
+    <style>
+        #header {text-align: center;}
+    </style>
+</head>
+<body>
+    <!-- html 요소 영역 -->
+    <div id="header">
+        <h1>나는 {{title}}</h1>
+        <h2>나는 {{subTitle}}</h2>
+        <p>나는 {{txt}}</p>
+        <button type="button" v-on:click='btnClick'>클릭</button>
+        <button type="button" @mouseenter='btnMouse'>마우스오버</button>
+    </div>
+
+    <!-- 스크립트 영역 -->
+    <script>
+        var header = new Vue({
+            el: '#header',
+            data: {
+                title: '타이틀',
+                subTitle: '서브 타이틀',
+                txt: '본문 내용'
+            },
+            methods: {
+                btnClick: function(){
+                    this.title = '변경된 타이틀',
+                    this.subTitle = '변경된 서브 타이틀',
+                    this.txt = '변경된 본문 내용'
+                },
+                btnMouse: function(){
+                    this.title = '숫자로 변경!',
+                    this.subTitle = '500,000',
+                    this.txt = 600
+                }
+            }
+        })
+    </script>
+</body>
+</html>
