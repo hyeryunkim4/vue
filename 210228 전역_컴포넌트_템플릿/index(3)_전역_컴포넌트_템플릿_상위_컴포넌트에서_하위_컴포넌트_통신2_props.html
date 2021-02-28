@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>전역 컴포넌트 && 템플릿</title>
+    <!-- 오픈소스 -->
+    <script src="./vue/lib/vue.js"></script>
+    <script src="./js/lib/jquery.min.js"></script>
+    <style>
+        #wrapper {width: 1200px; margin: 0 auto; text-align: center; background: #f0f0f0;}
+        #wrapper #main .button-box {padding: 50px 0;}
+        #wrapper #main .button-box button {background: #333; color: #eee; font-size: 20px; width: 200px; height: 50px; border: none; cursor: pointer;}
+        #wrapper #main .button-box button:hover {background: #999;}
+        #wrapper #main .button-box button:active {background: #922;}
+        #wrapper #main .button-box p {padding: 50px 0; color: #379; font-size: 40px;}
+
+    </style>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- html -->
+        <div id="main">
+            <div class="button-box">   
+                <babo-comp v-bind:count='num'></babo-comp>
+                <button @click='countFn'>클릭</button>
+            </div>
+        </div>
+
+        <!-- script -->
+        <script>
+            // 전역 컴포넌트 생성
+            Vue.component('babo-comp',{
+                props: ['count'],
+                template: '<p>{{ count }}</p>' // 하위 컴포넌트 props의 속성 이름 'count'로 전달받음
+            })
+
+            // 뷰 인스턴스 생성
+            var main = new Vue({
+                el: '#main',
+                data: {
+                    num: 0 // 루트의 num값이 하위 컴포넌트에 전달(통신)됨
+                },
+                methods: {
+                    countFn: function(){
+                        this.num ++;
+                    }
+                }
+            })
+        </script>
+    </div>
+</body>
+</html>

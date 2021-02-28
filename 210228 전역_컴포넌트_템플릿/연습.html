@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>연습해보기</title>
+    <script src="./vue/lib/vue.js"></script>
+    <style>
+        * {margin: 0; padding: 0; list-style: none; font-size: 14px; line-height: 1.6; font-weight: normal; color: #000;}
+        html, body {width: 100%; height: 100%;}
+        html {overflow-y: scroll;}
+        a {color: #000; text-decoration: none;}
+        .cf::after {content: ''; display: block; clear: left;}
+
+        #wrap {width: 1200px; margin: auto;}
+        #main h2 {font-size: 30px; font-weight: 700;}
+        #main .list-wrap ul {border-top: 1px solid #ccc;}
+        #main .list-wrap ul li {border-bottom: 1px solid #ccc; padding: 5px 0;}
+        #main .list-wrap ul li.list-tit {background: #f5f5f5; padding: 8px 0;}
+        #main .list-wrap ul li.list-tit span {font-weight: bold;}
+        #main .list-wrap ul li span {display: block; float: left; text-align: center;}
+        #main .list-wrap ul li span.no {width: 5%;}
+        #main .list-wrap ul li span.tit {width: 70%;}
+        #main .list-wrap ul li span.date {width: 15%;}
+        #main .list-wrap ul li span.view {width: 10%;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <!-- html -->
+        <div id="main">
+            <h2>{{mainH2}}</h2>
+            <div class="list-wrap">
+                <ul>
+                    <li class='list-tit cf'>
+                        <span class='no'>번호</span>
+                        <span class='tit'>제목</span>
+                        <span class='date'>날짜</span>
+                        <span class='view'>조회수</span>
+                    </li>
+                    <list-comp v-for='row in mainList' v-bind:listComp='row'></list-comp>
+                </ul>
+            </div>
+        </div>
+
+        <!-- script -->
+        <script>
+            Vue.component('list-comp',{
+                props: ['listComp'],
+                template: 
+                "<li class='cf'>\
+                    <span class='no'>{{listComp.no}}</span>\
+                    <span class='tit'>{{listComp.title}}</span>\
+                    <span class='date'>{{listComp.date}}</span>\
+                    <span class='view'>{{listComp.view}}</span>\
+                </li>"
+            })
+
+            var main = new Vue({
+                el: '#main',
+                data: {
+                    mainH2 : '공지사항',
+                    mainList: [
+                        {no: "291", title: "시스템 개선 및 점검 안내", date: "2021-01-27", view: "8545"},
+                        {no: "290", title: "시스템 개선 및 점검 안내", date: "2021-01-22", view: "12208"},
+                        {no: "289", title: "SSG PAY 시스템 점검 안내", date: "2021-01-15", view: "17223"},
+                        {no: "288", title: "스타벅스 현대카드 스마트폰 케이스 증정 이벤트 진행 기간 연장 안내", date: "2021-01-07", view: "3743"},
+                        {no: "287", title: "스타벅스 카드 이용약관 개정 안내", date: "2021-01-07", view: "45299"},
+                        {no: "286", title: "홈페이지 이용약관 개정 안내", date: "2021-01-07", view: "11903"},
+                        {no: "285", title: "삼성카드 시스템 점검에 따른 결제 일시 중단 안내", date: "2020-12-24", view: "1185"},
+                        {no: "284", title: "본인인증 시스템 작업 안내", date: "2020-12-23", view: "37530"},
+                        {no: "283", title: "시스템 개선 및 점검 안내", date: "2020-12-18", view: "18142"},
+                        {no: "282", title: "제휴사 서비스 점검으로 인한 My DT Pass - 소유주 인증 진행 불가", date: "2020-12-11", view: "39854"}
+                    ]
+                }
+            })
+        </script>
+    </div>
+</body>
+</html>
