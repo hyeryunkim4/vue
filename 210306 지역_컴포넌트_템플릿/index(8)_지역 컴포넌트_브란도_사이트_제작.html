@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지역 컴포넌트 && 템플릿</title>
+    <link rel="stylesheet" href="./css/reset.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <!-- 오픈소스 -->
+    <script src="./vue/lib/vue.js"></script>
+    <script src="./js/lib/jquery.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <!-- s : 헤더 -->
+        <div id="header">
+            <div class="wrap">
+                <div class="gap">
+                    <div class="container">
+                        <logo-comp></logo-comp>
+                        <nav id="nav">
+                            <ul>
+                                <nav-comp v-for="item in gnb" v-bind:propsnav="item"></nav-comp>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            var logoComp = {
+                props: ['propslogo'],
+                template: '\
+                    <div class="logo">\
+                        <a href="javascript:;" class="logo-btn">\
+                            <img src="./img/logo_image.png" alt="logo">\
+                        </a>\
+                    </div>\
+                '
+            }
+
+            var navComp = {
+                props: ['propsnav'], // 대문자로 쓰면 안 나옴, 무조건 소문자로 쓰기
+                template: 
+                '<li>\
+                    <a href="javascript:;" class="main-btn">{{ propsnav.menu }}</a>\
+                </li>'
+            }
+
+            
+            var header = new Vue({
+                el: '#header',
+                data: {
+                    gnb: [
+                        {menu: 'ABOUT'},
+                        {menu: 'PORTFOLIO'},
+                        {menu: 'SERVICES'},
+                        {menu: 'TESTIMONIAL'},
+                        {menu: 'BLOG'},
+                        {menu: 'CONTACT'}
+                    ]
+                },
+                components: {
+                    'logo-comp': logoComp,
+                    'nav-comp': navComp
+                }
+            })
+        </script>
+        <!-- e : 헤더 -->
+
+        <!-- s : 메인 -->
+        <div id="main">
+            <section1-comp></section1-comp>
+        </div>
+
+        <script>
+            var section1Comp = {
+                props: ['propssec1'],
+                template: '\
+                    <section id="section1">\
+                        <div class="wrap">\
+                            <div class="gap">\
+                                <div class="container">\
+                                    <h4>WE WORK HARD, WE PLAY HARD</h4>\
+                                    <h2>\
+                                        SALIENT IS DIGITAL <br>\
+                                        BRILLIANCE\
+                                    </h2>\
+                                    <h3>CREATIVE SOLUTIONS TO IMPROVE YOUR BUSINESS</h3>\
+                                    <p>\
+                                        <span><a href="javascript:;">OUR SERVICES</a></span>\
+                                    </p>\
+                                </div>\
+                            </div>\
+                        </div>\
+                    </section>\
+                '
+            }
+
+            var main = new Vue({
+                el: '#main',
+                data: {
+
+                },
+                components: {
+                    'section1-comp': section1Comp
+                }
+            })
+        </script>   
+        <!-- e : 메인 -->    
+    </div>
+</body>
+</html>
