@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>지역 컴포넌트 && 템플릿</title>
+    <!-- 오픈소스 -->
+    <script src="./vue/lib/vue.js"></script>
+    <script src="./js/lib/jquery.min.js"></script>
+</head>
+<body>
+    <div id="wrap">
+        <div id="fruit">
+            <h2>좋아하는 과일은?</h2>
+            <ul>
+                <data-comp v-for='row in fruit' v-bind:propsdata='row'></data-comp>
+            </ul>
+        </div>
+
+        <script>
+            var dataComp = {
+                props: ['propsdata'],
+                template: '<li>번호 : {{propsdata.no}} / 이름 : {{propsdata.name}} / 좋아하는 정도는? {{propsdata.like}}</li>'
+            }
+            
+            var food = new Vue({
+                el: '#fruit',
+                data: {
+                    fruit: [
+                        {'no': '01', 'name': '사과', 'like':'보통'},
+                        {'no': '02', 'name': '배', 'like':'보통'},
+                        {'no': '03', 'name': '파인애플', 'like':'좋음'},
+                        {'no': '04', 'name': '오렌지', 'like':'좋음'},
+                        {'no': '05', 'name': '토마토', 'like':'싫음'}
+                    ]
+                },
+                components: {
+                    'data-comp' : dataComp
+                }
+            })
+        </script>
+    </div>
+</body>
+</html>
